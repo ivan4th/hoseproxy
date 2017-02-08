@@ -29,8 +29,10 @@ Below is the list of important options to consider:
         apiserver URL (default "http://127.0.0.1:8080/")
   -nparallel int
         number of goroutines to launch (default 1)
+  -ns string
+        namespace of the source service (default "default")
   -nservices int
-        max number of services to create in each goroutine (default 10)
+        maximum number of services to create in each goroutine (default 10)
   -nsteps int
         maximum number of steps to take in each goroutine (default 20)
   -prefix string

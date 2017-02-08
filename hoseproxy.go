@@ -19,7 +19,8 @@ var (
 	kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
 	prefix     = flag.String("prefix", "hose-proxy", "service name prefix")
 	src        = flag.String("src", "", "name of the default service")
-	nServices  = flag.Int("nservices", 10, "max number of services to create in each goroutine")
+	ns         = flag.String("ns", "default", "namespace of the source service")
+	nServices  = flag.Int("nservices", 10, "maximum number of services to create in each goroutine")
 	nSteps     = flag.Int("nsteps", 20, "maximum number of steps to take in each goroutine")
 	nParallel  = flag.Int("nparallel", 1, "number of goroutines to launch")
 )
@@ -120,7 +121,7 @@ func main() {
 		log.Fatalf("NewForConfig(): %v", err)
 	}
 
-	srcEp, err := clientset.Core().Endpoints("default").Get(*src)
+	srcEp, err := clientset.Core().Endpoints(*ns).Get(*src)
 	if err != nil {
 		log.Fatalf("Getting endpoints: %v", err)
 	}
